@@ -1,0 +1,54 @@
+.Burger {
+  justify-self: end;
+  align-self: center;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  height: 8px;
+  width: 16px;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  display: none;
+  transition: all 0.2s;
+}
+
+.Burger::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.2s;
+}
+
+.Burger::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.2s;
+}
+
+.Burger_active.Burger::before {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.Burger_active.Burger::after {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media screen and (max-width: 650px) {
+  .Burger {
+    display: block;
+    margin-right: 16px;
+  }
+}
