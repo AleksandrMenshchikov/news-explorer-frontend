@@ -3,16 +3,25 @@
   align-self: center;
   grid-column: 1/2;
   grid-row: 1/2;
-  height: 8px;
-  width: 16px;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: none;
-  position: relative;
   display: none;
+  padding: 0;
+}
+
+.Burger__inner {
+  height: 8px;
+  width: 16px;
+  position: relative;
   transition: all 0.2s;
 }
 
-.Burger::after {
+.Burger__inner::after {
   content: '';
   position: absolute;
   top: 0;
@@ -23,7 +32,7 @@
   transition: all 0.2s;
 }
 
-.Burger::before {
+.Burger__inner::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -34,13 +43,13 @@
   transition: all 0.2s;
 }
 
-.Burger_active.Burger::before {
+.Burger_active .Burger__inner::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.Burger_active.Burger::after {
+.Burger_active .Burger__inner::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-45deg);
@@ -48,7 +57,7 @@
 
 @media screen and (max-width: 650px) {
   .Burger {
-    display: block;
+    display: flex;
     margin-right: 16px;
   }
 }

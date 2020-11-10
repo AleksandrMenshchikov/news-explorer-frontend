@@ -3,7 +3,7 @@ import './SearchForm.css';
 
 const SearchForm = () => {
   return (
-    <div className="SearchForm">
+    <section className="SearchForm">
       <h1 className="SearchForm__title">Что творится в мире?</h1>
       <p className="SearchForm__subtitle">
         Находите самые свежие статьи на любую тему и сохраняйте в своём личном
@@ -19,7 +19,7 @@ const SearchForm = () => {
           Искать
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 

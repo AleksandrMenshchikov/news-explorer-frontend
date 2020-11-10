@@ -92,11 +92,12 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #1a1b22;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     box-sizing: border-box;
     pointer-events: none;
+    background-color: transparent;
+    transition: all 0.2s;
   }
   .Navigation__list {
     min-height: 230px;
@@ -124,17 +125,14 @@
   .Navigation__link_active {
     border-bottom: 3px solid transparent;
   }
+  .Navigation_active.Navigation {
+    background-color: #1a1b22;
+    pointer-events: auto;
+    opacity: 1;
+  }
 }
 
 .Navigation__list_active {
   display: grid;
 }
 
-.Navigation_active {
-  opacity: 1;
-}
-
-.Navigation_active.Navigation {
-  transition: all 0.2s;
-  pointer-events: auto;
-}

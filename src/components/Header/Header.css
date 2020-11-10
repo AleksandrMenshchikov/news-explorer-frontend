@@ -4,6 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
+  transition: all 0.2s;
 }
 
 .Header__logo {

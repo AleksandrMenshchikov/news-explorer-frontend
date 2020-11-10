@@ -12,7 +12,9 @@ const Burger = ({ isActiveButtonBurger, onClickButtonBurger }) => {
       type="button"
       aria-label="Кнопка навигации"
       className={`Burger ${isActiveButtonBurger && 'Burger_active'}`}
-    />
+    >
+      <div className="Burger__inner"></div>
+    </button>
   );
 };
 
