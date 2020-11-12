@@ -1,36 +1,46 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './Navigation.css';
-import iconSignoutWhite from '../../images/logout-white.svg';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./Navigation.css";
+import iconSignoutWhite from "../../images/logout-white.svg";
+import iconSignoutDark from "../../images/logout-dark.svg";
 
 const Navigation = ({
   isActiveButtonBurger,
   isLoggedIn,
   onClickButtonBurger,
   onSetLoggedInFalse,
+  onSetSavedNewsPathBoolean,
+  isSavedNewsPath,
+  onSetPopupOpened,
 }) => {
-  function handleNavLinkSignout() {
+  function handleNavLink() {
     if (isActiveButtonBurger) {
       onClickButtonBurger();
     }
-    if (isLoggedIn) {
-      onSetLoggedInFalse();
+    if (!isLoggedIn) {
+      onSetPopupOpened();
     }
+    onSetSavedNewsPathBoolean(false);
   }
 
   return (
     <nav
-      className={`Navigation ${isActiveButtonBurger && 'Navigation_active'}`}
+      className={`Navigation ${isActiveButtonBurger && "Navigation_active"} ${
+        isActiveButtonBurger && isSavedNewsPath && "Navigation_active_white"
+      }`}
     >
       <ul
         className={`Navigation__list ${
-          isActiveButtonBurger && 'Navigation__list_active'
-        } ${isLoggedIn && 'Navigation__list_loggedin'}`}
+          isActiveButtonBurger && "Navigation__list_active"
+        } ${isLoggedIn && "Navigation__list_loggedin"}`}
       >
         <li className="Navigation__item">
           <NavLink
+            onClick={() => onSetSavedNewsPathBoolean(false)}
             to="/"
-            className="Navigation__link Navigation__link_underlined"
+            className={`Navigation__link Navigation__link_underlined ${
+              isSavedNewsPath && "Navigation__link_theme_dark"
+            }`}
             activeClassName="Navigation__link_active"
             exact
           >
@@ -40,9 +50,14 @@ const Navigation = ({
         {isLoggedIn && (
           <li className="Navigation__item">
             <NavLink
+              onClick={() => onSetSavedNewsPathBoolean(true)}
               to="/saved-news"
-              className="Navigation__link Navigation__link_underlined"
-              activeClassName="Navigation__link_active"
+              className={`Navigation__link Navigation__link_underlined ${
+                isSavedNewsPath && "Navigation__link_theme_dark"
+              }`}
+              activeClassName={`Navigation__link_active ${
+                isSavedNewsPath && "Navigation__link_active_theme_dark"
+              }`}
               exact
             >
               Сохранённые статьи
@@ -51,15 +66,24 @@ const Navigation = ({
         )}
         <li className="Navigation__item Navigation__item_auth">
           <NavLink
-            to="/signin"
-            className="Navigation__link Navigation__link_auth"
-            onClick={handleNavLinkSignout}
+            onClick={handleNavLink}
+            to="/"
+            className={`Navigation__link Navigation__link_auth ${
+              isSavedNewsPath && "Navigation__link_auth_dark"
+            }`}
           >
-            {isLoggedIn ? 'User' : 'Авторизоваться'}
-            {isLoggedIn && (
+            {isLoggedIn ? "User" : "Авторизоваться"}
+            {isLoggedIn && !isSavedNewsPath && (
               <img
                 alt=""
                 src={iconSignoutWhite}
+                className="Navigation__image-signout"
+              />
+            )}
+            {isLoggedIn && isSavedNewsPath && (
+              <img
+                alt=""
+                src={iconSignoutDark}
                 className="Navigation__image-signout"
               />
             )}

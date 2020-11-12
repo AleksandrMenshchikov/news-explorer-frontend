@@ -1,7 +1,11 @@
 import React from 'react';
 import './Burger.css';
 
-const Burger = ({ isActiveButtonBurger, onClickButtonBurger }) => {
+const Burger = ({
+  isActiveButtonBurger,
+  onClickButtonBurger,
+  isSavedNewsPath,
+}) => {
   function handleClickButtonBurger() {
     onClickButtonBurger();
   }
@@ -11,7 +15,9 @@ const Burger = ({ isActiveButtonBurger, onClickButtonBurger }) => {
       onClick={handleClickButtonBurger}
       type="button"
       aria-label="Кнопка навигации"
-      className={`Burger ${isActiveButtonBurger && 'Burger_active'}`}
+      className={`Burger ${isActiveButtonBurger && "Burger_active"} ${
+        isSavedNewsPath && "Burger_theme-dark"
+      }`}
     >
       <div className="Burger__inner"></div>
     </button>

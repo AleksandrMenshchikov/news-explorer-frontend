@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 282px;
   flex-direction: column;
+  justify-content: center;
 }
 
 .NotFoundResult__image {
@@ -23,11 +23,36 @@
 
 .NotFoundResult__subtitle {
   max-width: 288px;
-  margin: 16px 0 80px;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 24px;
   color: #b6bcbf;
+  margin: 16px 0 80px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .NotFoundResult__image {
+    margin-top: 40px;
+  }
+  .NotFoundResult__title {
+    margin: 24px 0 0;
+  }
+  .NotFoundResult__subtitle {
+    margin: 16px 0 40px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .NotFoundResult__image {
+    margin-top: 32px;
+  }
+  .NotFoundResult__title {
+    margin: 24px 0 0;
+  }
+  .NotFoundResult__subtitle {
+    margin: 16px 0 32px;
+  }
 }

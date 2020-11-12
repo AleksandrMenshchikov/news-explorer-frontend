@@ -16,7 +16,7 @@
 
 .Burger__inner {
   height: 8px;
-  width: 16px;
+  width: 18px;
   position: relative;
   transition: all 0.2s;
 }
@@ -53,6 +53,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.Burger_theme-dark .Burger__inner::before{
+  background-color: #1A1B22;
+}
+
+.Burger_theme-dark .Burger__inner::after{
+  background-color: #1A1B22;
 }
 
 @media screen and (max-width: 650px) {

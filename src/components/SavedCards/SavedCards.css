@@ -1,0 +1,53 @@
+.SavedCards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f6f7;
+}
+
+.SavedCards__container {
+  max-width: 1232px;
+  margin: 62px 40px;
+  width: 100%;
+}
+
+.SavedCards__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-content: center;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.SavedCards__list-item {
+  list-style: none;
+}
+
+@media screen and (max-width: 900px) {
+  .SavedCards__list {
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .SavedCards__container {
+    margin: 32px 40px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .SavedCards__container {
+    margin: 24px 16px;
+  }
+  .NewsCardList__list {
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .SavedCards__list {
+    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  }
+}

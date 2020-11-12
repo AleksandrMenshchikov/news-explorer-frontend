@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import AboutAuthor from "../AboutAuthor/AboutAuthor";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import NotFoundResult from "../NotFoundResult/NotFoundResult";
@@ -12,14 +13,32 @@ const Main = ({
   isResult,
   isLoading,
   isNotFoundResult,
-}) => (
-  <div className="Main">
-    <Search isLoggedIn={isLoggedIn} onSetLoggedInFalse={onSetLoggedInFalse} />
-    {isLoading && <Preloader />}
-    {isResult && <NewsCardList isLoggedIn={isLoggedIn} />}
-    {isNotFoundResult && <NotFoundResult />}
-    <AboutAuthor />
-  </div>
-);
+  isSavedNewsPath,
+  onSetSavedNewsPathBoolean,
+  onSetPopupOpened,
+}) => {
+  return (
+    <div className="Main">
+      <Search
+        isLoggedIn={isLoggedIn}
+        onSetLoggedInFalse={onSetLoggedInFalse}
+        isSavedNewsPath={isSavedNewsPath}
+        onSetSavedNewsPathBoolean={onSetSavedNewsPathBoolean}
+        onSetPopupOpened={onSetPopupOpened}
+      />
+      <Route path="/" exact>
+        {isLoading && <Preloader />}
+        {isNotFoundResult && <NotFoundResult />}
+        {isResult && (
+          <NewsCardList
+            isLoggedIn={isLoggedIn}
+            isSavedNewsPath={isSavedNewsPath}
+          />
+        )}
+        <AboutAuthor />
+      </Route>
+    </div>
+  );
+};
 
 export default Main;

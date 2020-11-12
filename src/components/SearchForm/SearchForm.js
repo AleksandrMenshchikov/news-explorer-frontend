@@ -1,7 +1,11 @@
-import React from 'react';
-import './SearchForm.css';
+import React from "react";
+import "./SearchForm.css";
 
 const SearchForm = () => {
+  function handleFormSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
     <section className="SearchForm">
       <h1 className="SearchForm__title">Что творится в мире?</h1>
@@ -9,7 +13,7 @@ const SearchForm = () => {
         Находите самые свежие статьи на любую тему и сохраняйте в своём личном
         кабинете.
       </p>
-      <form className="SearchForm__form">
+      <form onClick={handleFormSubmit} className="SearchForm__form">
         <input
           type="text"
           className="SearchForm__input"

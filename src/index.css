@@ -1,7 +1,7 @@
 @import "./vendors/normalize.css";
 @import "./vendors/fonts/stylesheet.css";
 
-body {
+body #root {
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

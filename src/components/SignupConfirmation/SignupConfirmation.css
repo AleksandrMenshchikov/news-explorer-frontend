@@ -1,0 +1,34 @@
+.SignupConfirmation {
+  background-color: #fff;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  padding: 43px 36px 51px;
+}
+
+.SignupConfirmation__title {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1a1b22;
+  margin: 0;
+}
+
+.SignupConfirmation__link {
+  display: inline-block;
+  margin-top: 14px;
+  text-decoration: none;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #2f71e5;
+}
+
+@media screen and (max-width: 425px) {
+  .SignupConfirmation {
+    padding: 16px 17px 20px;
+  }
+}

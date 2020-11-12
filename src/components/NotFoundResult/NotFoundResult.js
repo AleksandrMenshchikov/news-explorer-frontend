@@ -11,7 +11,9 @@ const NotFoundResult = () => {
         className="NotFoundResult__image"
       />
       <p className="NotFoundResult__title">Ничего не найдено</p>
-      <p className="NotFoundResult__subtitle">Ничего не найдено</p>
+      <p className="NotFoundResult__subtitle">
+        К сожалению по вашему запросу ничего не найдено.
+      </p>
     </div>
   );
 }

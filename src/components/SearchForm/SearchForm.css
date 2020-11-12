@@ -5,6 +5,8 @@
   align-items: center;
   max-width: 608px;
   margin: auto;
+  opacity: 1;
+  transition: all 0.2s;
 }
 
 .SearchForm__title {
