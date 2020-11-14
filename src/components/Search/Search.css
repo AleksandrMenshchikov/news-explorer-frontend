@@ -1,0 +1,11 @@
+.Search {
+  background: url(../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg)
+    center/cover no-repeat;
+}
+
+@media screen and (max-width: 425px) {
+  .Search {
+    background: url(../../images/georgia-de-lotz--UsJoNxLaNo-unsplash-mobile.jpg)
+      center/cover no-repeat;
+  }
+}

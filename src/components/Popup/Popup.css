@@ -1,0 +1,89 @@
+.Popup {
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s;
+}
+
+.Popup_active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.Popup__container {
+  flex-basis: 430px;
+  position: relative;
+}
+
+.Popup__button-close {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -46px;
+  right: -46px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.Popup__button-close::after {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  transform: rotate(45deg);
+}
+
+.Popup__button-close::before {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  transform: rotate(-45deg);
+}
+
+.Popup__button-close:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 550px) {
+  .Popup {
+    align-items: flex-start;
+  }
+  .Popup__container {
+    margin-top: 66px;
+  }
+  .Popup__button-close {
+    width: 24px;
+    height: 24px;
+    right: 14px;
+  }
+  .Popup__button-close::after {
+    width: 18px;
+    height: 2px;
+  }
+  .Popup__button-close::before {
+    width: 18px;
+    height: 2px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+
+  .Popup__container {
+    margin-top: 65px;
+  }
+}

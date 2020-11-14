@@ -1,0 +1,106 @@
+.NewsCardList {
+  background: #f5f6f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.NewsCardList__container {
+  max-width: 1232px;
+  margin: 80px 40px;
+  width: 100%;
+}
+
+.NewsCardList__title {
+  font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+  margin: 0;
+  width: 100%;
+}
+
+.NewsCardList__list {
+  margin: 64px 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-content: center;
+  gap: 16px;
+}
+
+.NewsCardList__list-item {
+  list-style: none;
+}
+
+.NewsCardList__button {
+  width: 288px;
+  height: 64px;
+  cursor: pointer;
+  border: none;
+  background-color: #fff;
+  border-radius: 80px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1b22;
+  padding: 0;
+  margin: auto;
+  transition: all 0.2s;
+}
+
+.NewsCardList__button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 900px) {
+  .NewsCardList__list {
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .NewsCardList__container {
+    margin: 40px 40px;
+  }
+  .NewsCardList__title {
+    font-size: 30px;
+    line-height: 34px;
+  }
+  .NewsCardList__list {
+    margin: 32px 0;
+    gap: 8px;
+  }
+  .NewsCardList__button {
+    width: 2px;
+    height: 56px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .NewsCardList__container {
+    margin: 32px 16px;
+  }
+  .NewsCardList__list {
+    margin: 24px 0;
+    gap: 9px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .NewsCardList__list {
+    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+  }
+  .NewsCardList__button {
+    width: 288px;
+    height: 56px;
+  }
+}
