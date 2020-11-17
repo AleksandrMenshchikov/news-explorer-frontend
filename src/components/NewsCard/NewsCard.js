@@ -1,16 +1,137 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./NewsCard.css";
 import fallback from "../../images/fallback.png";
+import { api } from "../../utils/MainApi";
 
-const NewsCard = ({ isLoggedIn, isSavedNewsPath }) => {
+const NewsCard = ({
+  isLoggedIn,
+  isSavedNewsPath,
+  article,
+  onSetDeletedCard,
+  onSetIsPopupOpened,
+  onSetIsFormLoginActive,
+}) => {
   const [isMarked, setIsMarked] = useState(false);
+  const [articleId, setArticleId] = useState();
+
   const tooltipRef = useRef();
+
+  function correctWord(word) {
+    return word.split("").map((item, index) => {
+      return index === 0 ? item.toUpperCase() : item.toLowerCase();
+    });
+  }
+
+  useEffect(() => {
+    if (article.marked) {
+      setIsMarked(true);
+      setArticleId(article._id);
+    }
+  }, [article]);
+
+  function createDate(date) {
+    const months = {
+      1: "января",
+      2: "февраля",
+      3: "марта",
+      4: "апреля",
+      5: "мая",
+      6: "июня",
+      7: "июля",
+      8: "августа",
+      9: "сентября",
+      10: "октября",
+      11: "ноября",
+      12: "декабря",
+    };
+    const arr = date.split("T")[0].split("-");
+    const year = arr[0];
+    const month = arr[1];
+    const day = arr[2];
+
+    return `${day} ${months[month]}, ${year}`;
+  }
 
   function handleButtonClick() {
     if (isLoggedIn && !isSavedNewsPath) {
-      setIsMarked(!isMarked);
+      if (!isMarked) {
+        api
+          .postArticle(
+            article.keyword,
+            article.title,
+            article.description,
+            article.publishedAt,
+            article.source.name,
+            article.url,
+            article.urlToImage
+          )
+          .then((res) => {
+            if (res._id) {
+              setIsMarked(true);
+              setArticleId(res._id);
+              Promise.resolve(
+                JSON.parse(localStorage.getItem("articles"))
+              ).then((result) => {
+                const arr = result.map((item) => {
+                  if (item.description === res.text) {
+                    item.marked = true;
+                    item._id = res._id;
+                  }
+                  return item;
+                });
+                localStorage.setItem("articles", JSON.stringify(arr));
+              });
+            }
+          })
+          .catch((err) => console.log(err));
+      }
+      if (isMarked) {
+        api
+          .deleteArticle(articleId)
+          .then((res) => {
+            if (res._id) {
+              setIsMarked(false);
+              Promise.resolve(
+                JSON.parse(localStorage.getItem("articles"))
+              ).then((result) => {
+                const arr = result.map((item) => {
+                  if (item._id === res._id) {
+                    item.marked = false;
+                  }
+                  return item;
+                });
+                localStorage.setItem("articles", JSON.stringify(arr));
+              });
+            }
+          })
+          .catch((err) => console.log(err));
+      }
     } else if (!isLoggedIn) {
+      onSetIsPopupOpened(true);
+      onSetIsFormLoginActive(true)
       tooltipRef.current.classList.add("NewsCard__tooltip_active");
+    } else if (isLoggedIn && isSavedNewsPath) {
+      api
+        .deleteArticle(article._id)
+        .then((res) => {
+          if (res._id) {
+            setIsMarked(false);
+            Promise.resolve(JSON.parse(localStorage.getItem("articles")))
+              .then((result) => {
+                if (result) {
+                  const arr = result.map((item) => {
+                    if (item._id === res._id) {
+                      item.marked = false;
+                    }
+                    return item;
+                  });
+                  localStorage.setItem("articles", JSON.stringify(arr));
+                }
+              })
+              .finally(() => onSetDeletedCard(res));
+          }
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -30,7 +151,7 @@ const NewsCard = ({ isLoggedIn, isSavedNewsPath }) => {
     <div className="NewsCard">
       <img
         className="NewsCard__image"
-        src={fallback}
+        src={article.urlToImage || article.image || fallback}
         alt="Изображение карточки"
       />
       <button
@@ -83,22 +204,21 @@ const NewsCard = ({ isLoggedIn, isSavedNewsPath }) => {
       {isSavedNewsPath && (
         <div className="NewsCard__keyword">
           <p className="NewsCard__keyword-text">
-            метоксихлордиэтиламинометилбутиламиноакридин
+            {correctWord(article.keyword)}
           </p>
         </div>
       )}
       <article className="NewsCard__content">
-        <p className="NewsCard__date">10 ноября, 2020</p>
-        <h4 className="NewsCard__title">
-          «Первозданная тайга»: новый фотопроект Игоря Шпиленка в новостной
-          ленте
-        </h4>
-        <p className="NewsCard__subtitle">
-          Знаменитый фотограф снимает первозданные леса России, чтобы рассказать
-          о необходимости их сохранения. В этот раз он отправился в
-          Двинско-Пинежскую тайгу, где он решил остановится на несколько дней.
+        <p className="NewsCard__date">
+          {createDate(article.publishedAt || article.date)}
         </p>
-        <p className="NewsCard__source">Риа</p>
+        <h4 className="NewsCard__title">{article.title}</h4>
+        <p className="NewsCard__subtitle">
+          {article.description || article.text}
+        </p>
+        <p className="NewsCard__source">
+          {article.source.name || article.source}
+        </p>
       </article>
     </div>
   );

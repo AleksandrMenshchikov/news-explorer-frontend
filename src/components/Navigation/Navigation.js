@@ -1,26 +1,57 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./Navigation.css";
 import iconSignoutWhite from "../../images/logout-white.svg";
 import iconSignoutDark from "../../images/logout-dark.svg";
+import * as auth from "../../utils/Auth";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Navigation = ({
   isActiveButtonBurger,
   isLoggedIn,
   onClickButtonBurger,
-  onSetLoggedInFalse,
   onSetSavedNewsPathBoolean,
   isSavedNewsPath,
-  onSetPopupOpened,
+  onSetIsPopupOpened,
+  onSetIsFormRegisterActive,
+  onSetIsFormLoginActive,
+  onSetIsSignupConfirmationActive,
+  onSetLoggedInFalse,
+  onSetIsResult,
 }) => {
+  const currentUser = React.useContext(CurrentUserContext);
+  const history = useHistory();
+
+  function createName(string) {
+    if (string.length >= 20) {
+      return `${string.slice(0, 19)}...`;
+    } else {
+      return string;
+    }
+  }
+
   function handleNavLink() {
     if (isActiveButtonBurger) {
       onClickButtonBurger();
     }
     if (!isLoggedIn) {
-      onSetPopupOpened();
+      onSetIsPopupOpened(true);
+      onSetIsFormRegisterActive(false);
+      onSetIsFormLoginActive(true);
+      onSetIsSignupConfirmationActive(false);
     }
     onSetSavedNewsPathBoolean(false);
+    if (isLoggedIn) {
+      auth
+        .signout()
+        .then((res) => {
+          onSetLoggedInFalse();
+          history.push("/");
+          localStorage.removeItem("articles");
+          onSetIsResult(false);
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   return (
@@ -36,7 +67,12 @@ const Navigation = ({
       >
         <li className="Navigation__item">
           <NavLink
-            onClick={() => onSetSavedNewsPathBoolean(false)}
+            onClick={() => {
+              if (isActiveButtonBurger) {
+                onClickButtonBurger();
+              }
+              onSetSavedNewsPathBoolean(false);
+            }}
             to="/"
             className={`Navigation__link Navigation__link_underlined ${
               isSavedNewsPath && "Navigation__link_theme_dark"
@@ -50,7 +86,12 @@ const Navigation = ({
         {isLoggedIn && (
           <li className="Navigation__item">
             <NavLink
-              onClick={() => onSetSavedNewsPathBoolean(true)}
+              onClick={() => {
+                if (isActiveButtonBurger) {
+                  onClickButtonBurger();
+                }
+                onSetSavedNewsPathBoolean(true);
+              }}
               to="/saved-news"
               className={`Navigation__link Navigation__link_underlined ${
                 isSavedNewsPath && "Navigation__link_theme_dark"
@@ -65,14 +106,13 @@ const Navigation = ({
           </li>
         )}
         <li className="Navigation__item Navigation__item_auth">
-          <NavLink
+          <button
             onClick={handleNavLink}
-            to="/"
             className={`Navigation__link Navigation__link_auth ${
               isSavedNewsPath && "Navigation__link_auth_dark"
             }`}
           >
-            {isLoggedIn ? "User" : "Авторизоваться"}
+            {isLoggedIn ? `${createName(currentUser.name)}` : "Авторизоваться"}
             {isLoggedIn && !isSavedNewsPath && (
               <img
                 alt=""
@@ -87,7 +127,7 @@ const Navigation = ({
                 className="Navigation__image-signout"
               />
             )}
-          </NavLink>
+          </button>
         </li>
       </ul>
     </nav>

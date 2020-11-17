@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import AboutAuthor from "../AboutAuthor/AboutAuthor";
+import ErrorServer from "../ErrorServer/ErrorServer";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import NotFoundResult from "../NotFoundResult/NotFoundResult";
 import Preloader from "../Preloader/Preloader";
@@ -15,7 +16,18 @@ const Main = ({
   isNotFoundResult,
   isSavedNewsPath,
   onSetSavedNewsPathBoolean,
-  onSetPopupOpened,
+  onSetIsPopupOpened,
+  onSetIsLoading,
+  onSetIsResult,
+  onSetIsNotFoundResult,
+  isErrorServer,
+  setIsErrorServer,
+  onSetArticles,
+  articles,
+  onSetIsFormRegisterActive,
+  onSetIsFormLoginActive,
+  onSetIsSignupConfirmationActive,
+  isNavigationActive,
 }) => {
   return (
     <div className="Main">
@@ -24,15 +36,28 @@ const Main = ({
         onSetLoggedInFalse={onSetLoggedInFalse}
         isSavedNewsPath={isSavedNewsPath}
         onSetSavedNewsPathBoolean={onSetSavedNewsPathBoolean}
-        onSetPopupOpened={onSetPopupOpened}
+        onSetIsPopupOpened={onSetIsPopupOpened}
+        onSetIsLoading={onSetIsLoading}
+        onSetIsResult={onSetIsResult}
+        onSetIsNotFoundResult={onSetIsNotFoundResult}
+        setIsErrorServer={setIsErrorServer}
+        onSetArticles={onSetArticles}
+        onSetIsFormRegisterActive={onSetIsFormRegisterActive}
+        onSetIsFormLoginActive={onSetIsFormLoginActive}
+        onSetIsSignupConfirmationActive={onSetIsSignupConfirmationActive}
+        isNavigationActive={isNavigationActive}
       />
       <Route path="/" exact>
         {isLoading && <Preloader />}
         {isNotFoundResult && <NotFoundResult />}
+        {isErrorServer && <ErrorServer />}
         {isResult && (
           <NewsCardList
             isLoggedIn={isLoggedIn}
             isSavedNewsPath={isSavedNewsPath}
+            articles={articles}
+            onSetIsPopupOpened={onSetIsPopupOpened}
+            onSetIsFormLoginActive={onSetIsFormLoginActive}
           />
         )}
         <AboutAuthor />

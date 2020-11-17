@@ -3,11 +3,21 @@ import SavedCards from "../SavedCards/SavedCards";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import "./SavedNews.css";
 
-const SavedNews = ({ isLoggedIn, isSavedNewsPath }) => {
+const SavedNews = ({
+  isLoggedIn,
+  isSavedNewsPath,
+  articlesForSavedNews,
+  onSetDeletedCard,
+}) => {
   return (
     <>
-      <SavedNewsHeader />
-      <SavedCards isLoggedIn={isLoggedIn} isSavedNewsPath={isSavedNewsPath} />
+      <SavedNewsHeader articlesForSavedNews={articlesForSavedNews} />
+      <SavedCards
+        isLoggedIn={isLoggedIn}
+        isSavedNewsPath={isSavedNewsPath}
+        articlesForSavedNews={articlesForSavedNews}
+        onSetDeletedCard={onSetDeletedCard}
+      />
     </>
   );
 };
