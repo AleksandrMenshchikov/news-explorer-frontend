@@ -1,5 +1,5 @@
-// const BASE_URL_API = "https://api.24news-explorer.ru";
-const BASE_URL_API = "http://localhost:4000";
+const BASE_URL_API = "https://api.24news-explorer.ru";
+// const BASE_URL_API = "http://localhost:4000";
 
 export const register = (email, password, name) => {
   return fetch(`${BASE_URL_API}/signup`, {
