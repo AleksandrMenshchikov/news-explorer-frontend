@@ -10,6 +10,7 @@ const NewsCardList = ({
   articles,
   onSetIsPopupOpened,
   onSetIsFormLoginActive,
+  onSetArticles,
 }) => {
   const [slicer, setSlicer] = useState(3);
   const [isStop, setIsStop] = useState(false);
@@ -35,13 +36,18 @@ const NewsCardList = ({
                 article={article}
                 onSetIsPopupOpened={onSetIsPopupOpened}
                 onSetIsFormLoginActive={onSetIsFormLoginActive}
+                articles={articles}
+                onSetArticles={onSetArticles}
               />
             </li>
           ))}
         </ul>
         {isStop ? null : (
           <button
-            onClick={() => setSlicer(slicer + 3)}
+            onClick={() => {
+              onSetArticles(JSON.parse(localStorage.getItem("articles")));
+              setSlicer(slicer + 3);
+            }}
             type="button"
             className="NewsCardList__button"
           >

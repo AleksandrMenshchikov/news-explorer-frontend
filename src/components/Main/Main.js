@@ -58,6 +58,7 @@ const Main = ({
             articles={articles}
             onSetIsPopupOpened={onSetIsPopupOpened}
             onSetIsFormLoginActive={onSetIsFormLoginActive}
+            onSetArticles={onSetArticles}
           />
         )}
         <AboutAuthor />

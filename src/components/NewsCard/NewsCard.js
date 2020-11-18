@@ -8,8 +8,6 @@ const NewsCard = ({
   isSavedNewsPath,
   article,
   onSetDeletedCard,
-  onSetIsPopupOpened,
-  onSetIsFormLoginActive,
 }) => {
   const [isMarked, setIsMarked] = useState(false);
   const [articleId, setArticleId] = useState();
@@ -25,6 +23,9 @@ const NewsCard = ({
   useEffect(() => {
     if (article.marked) {
       setIsMarked(true);
+      setArticleId(article._id);
+    } else {
+      setIsMarked(false);
       setArticleId(article._id);
     }
   }, [article]);

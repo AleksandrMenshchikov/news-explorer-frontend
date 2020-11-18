@@ -163,12 +163,12 @@ const App = () => {
           onSetIsNotFoundResult={setIsNotFoundResult}
           isErrorServer={isErrorServer}
           setIsErrorServer={setIsErrorServer}
-          onSetArticles={setArticles}
           articles={articles}
           onSetIsFormRegisterActive={setIsFormRegisterActive}
           onSetIsFormLoginActive={setIsFormLoginActive}
           onSetIsSignupConfirmationActive={setIsSignupConfirmationActive}
           isNavigationActive={isNavigationActive}
+          onSetArticles={setArticles}
         />
         <ProtectedRoute
           component={SavedNews}
