@@ -158,7 +158,6 @@ const NewsCard = ({
         onClick={handleButtonClick}
         onMouseOver={handleButtonMouseOver}
         onMouseLeave={handleButtonMouseLeave}
-        type="button"
         className="NewsCard__mark-container"
       >
         {isSavedNewsPath ? (
