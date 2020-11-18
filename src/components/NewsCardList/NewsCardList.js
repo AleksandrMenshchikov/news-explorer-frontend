@@ -15,7 +15,7 @@ const NewsCardList = ({
   const [isStop, setIsStop] = useState(false);
 
   useEffect(() => {
-    if (slicer > articles.length) {
+    if (slicer >= articles.length) {
       setIsStop(true);
     } else {
       setIsStop(false);
