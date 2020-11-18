@@ -37,6 +37,7 @@
   font-size: 14px;
   line-height: 17px;
   color: #000;
+  box-sizing: border-box;
 }
 
 .Form__input::placeholder {
@@ -143,5 +144,8 @@
   .Form {
     height: 100vh;
     padding: 16px 17px 16px;
+  }
+  .Form__input {
+    font-size: 16px;
   }
 }
