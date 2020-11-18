@@ -107,6 +107,7 @@ const Navigation = ({
         )}
         <li className="Navigation__item Navigation__item_auth">
           <div
+            tabIndex={0}
             onClick={handleNavLink}
             className={`Navigation__link Navigation__link_auth ${
               isSavedNewsPath && "Navigation__link_auth_dark"

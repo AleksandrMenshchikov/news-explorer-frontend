@@ -108,7 +108,7 @@ const NewsCard = ({
       }
     } else if (!isLoggedIn) {
       onSetIsPopupOpened(true);
-      onSetIsFormLoginActive(true)
+      onSetIsFormLoginActive(true);
       tooltipRef.current.classList.add("NewsCard__tooltip_active");
     } else if (isLoggedIn && isSavedNewsPath) {
       api
@@ -132,6 +132,9 @@ const NewsCard = ({
           }
         })
         .catch((err) => console.log(err));
+    } else {
+      onSetIsPopupOpened(false);
+      onSetIsFormLoginActive(false);
     }
   }
 
