@@ -196,7 +196,7 @@ const NewsCard = ({
       <div ref={tooltipRef} className="NewsCard__tooltip">
         {isSavedNewsPath
           ? "Убрать из сохранённых"
-          : "Войдите, чтобы сохранять статьи"}
+          : "Авторизуйтесь, чтобы сохранять статьи"}
       </div>
       {isSavedNewsPath && (
         <div className="NewsCard__keyword">
