@@ -38,6 +38,7 @@
   grid-template-columns: auto;
   margin-top: 64px;
   margin-bottom: 80px;
+  grid-template-rows: max-content;
 }
 
 .SearchForm__input {
