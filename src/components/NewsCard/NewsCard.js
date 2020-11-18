@@ -154,7 +154,7 @@ const NewsCard = ({
         src={article.urlToImage || article.image || fallback}
         alt="Изображение карточки"
       />
-      <button
+      <div
         onClick={handleButtonClick}
         onMouseOver={handleButtonMouseOver}
         onMouseLeave={handleButtonMouseLeave}
@@ -195,7 +195,7 @@ const NewsCard = ({
             />
           </svg>
         )}
-      </button>
+      </div>
       <div ref={tooltipRef} className="NewsCard__tooltip">
         {isSavedNewsPath
           ? "Убрать из сохранённых"
