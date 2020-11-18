@@ -106,7 +106,7 @@ const Navigation = ({
           </li>
         )}
         <li className="Navigation__item Navigation__item_auth">
-          <button
+          <div
             onClick={handleNavLink}
             className={`Navigation__link Navigation__link_auth ${
               isSavedNewsPath && "Navigation__link_auth_dark"
@@ -127,7 +127,7 @@ const Navigation = ({
                 className="Navigation__image-signout"
               />
             )}
-          </button>
+          </div>
         </li>
       </ul>
     </nav>
