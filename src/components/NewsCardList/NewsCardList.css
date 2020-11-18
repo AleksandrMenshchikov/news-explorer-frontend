@@ -20,13 +20,14 @@
   color: #1a1b22;
   margin: 0;
   width: 100%;
+  text-align: center;
 }
 
 .NewsCardList__list {
-  margin: 64px 0;
+  margin: 64px 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 0.5fr));
   justify-content: center;
   gap: 16px;
 }
@@ -52,7 +53,7 @@
   justify-content: center;
   color: #1a1b22;
   padding: 0;
-  margin: auto;
+  margin: 64px auto 0;
   transition: all 0.2s;
 }
 
@@ -62,7 +63,7 @@
 
 @media screen and (max-width: 900px) {
   .NewsCardList__list {
-    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(224px, 0.5fr));
     gap: 8px;
   }
 }
@@ -76,11 +77,12 @@
     line-height: 34px;
   }
   .NewsCardList__list {
-    margin: 32px 0;
+    margin: 32px 0 0;
     gap: 8px;
   }
   .NewsCardList__button {
-    width: 2px;
+    margin: 32px auto 0;
+    width: 240px;
     height: 56px;
   }
 }
@@ -90,8 +92,11 @@
     margin: 32px 16px;
   }
   .NewsCardList__list {
-    margin: 24px 0;
+    margin: 24px 0 0;
     gap: 9px;
+  }
+   .NewsCardList__button {
+    margin: 24px auto 0;
   }
 }
 

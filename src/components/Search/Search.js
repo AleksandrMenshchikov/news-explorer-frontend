@@ -9,7 +9,16 @@ const Search = ({
   onSetLoggedInFalse,
   isSavedNewsPath,
   onSetSavedNewsPathBoolean,
-  onSetPopupOpened,
+  onSetIsPopupOpened,
+  onSetIsLoading,
+  onSetIsResult,
+  onSetIsNotFoundResult,
+  setIsErrorServer,
+  onSetArticles,
+  onSetIsFormRegisterActive,
+  onSetIsFormLoginActive,
+  onSetIsSignupConfirmationActive,
+  isNavigationActive,
 }) => {
   const [isActiveButtonBurger, setIsActiveButtonBurger] = useState(false);
 
@@ -26,10 +35,22 @@ const Search = ({
         onSetLoggedInFalse={onSetLoggedInFalse}
         isSavedNewsPath={isSavedNewsPath}
         onSetSavedNewsPathBoolean={onSetSavedNewsPathBoolean}
-        onSetPopupOpened={onSetPopupOpened}
+        onSetIsPopupOpened={onSetIsPopupOpened}
+        onSetIsFormRegisterActive={onSetIsFormRegisterActive}
+        onSetIsFormLoginActive={onSetIsFormLoginActive}
+        onSetIsSignupConfirmationActive={onSetIsSignupConfirmationActive}
+        isNavigationActive={isNavigationActive}
+        onSetIsResult={onSetIsResult}
       />
       <Route path="/" exact>
-        <SearchForm isSavedNewsPath={isSavedNewsPath} />
+        <SearchForm
+          isSavedNewsPath={isSavedNewsPath}
+          onSetIsLoading={onSetIsLoading}
+          onSetIsResult={onSetIsResult}
+          onSetIsNotFoundResult={onSetIsNotFoundResult}
+          setIsErrorServer={setIsErrorServer}
+          onSetArticles={onSetArticles}
+        />
       </Route>
     </div>
   );

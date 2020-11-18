@@ -37,6 +37,7 @@
   font-size: 14px;
   line-height: 17px;
   color: #000;
+  box-sizing: border-box;
 }
 
 .Form__input::placeholder {
@@ -81,7 +82,6 @@
   font-size: 18px;
   line-height: 24px;
   color: #fff;
-
   transition: all 0.2s;
   cursor: pointer;
 }
@@ -120,6 +120,10 @@
   color: #2f71e5;
   margin: 16px 0 0;
   transition: all 0.2s;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
 }
 
 .Form__auth-link:hover {

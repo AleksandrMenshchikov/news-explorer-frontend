@@ -1,18 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './SignupConfirmation.css'
+import React from "react";
+import "./SignupConfirmation.css";
 
-const SignupConfirmation = () => {
+const SignupConfirmation = ({
+  onSetIsFormLoginActive,
+  onSetIsSignupConfirmationActive,
+}) => {
   return (
     <section className="SignupConfirmation">
       <h4 className="SignupConfirmation__title">
         Пользователь успешно зарегистрирован!
       </h4>
-      <Link to="/" className="SignupConfirmation__link">
+      <button
+        onClick={() => {
+          onSetIsSignupConfirmationActive(false);
+          onSetIsFormLoginActive(true);
+        }}
+        className="SignupConfirmation__link"
+      >
         Войти
-      </Link>
+      </button>
     </section>
   );
-}
+};
 
-export default SignupConfirmation
+export default SignupConfirmation;

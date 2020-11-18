@@ -1,8 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Form.css";
+import * as auth from "../../utils/Auth";
 
-const Form = ({ title, buttonValue, authText, isPopupOpened, nameInput }) => {
+const Form = ({
+  title,
+  buttonValue,
+  authText,
+  isPopupOpened,
+  nameInput,
+  isFormRegisterActive,
+  onSetIsSignupConfirmationActive,
+  onSetIsFormRegisterActive,
+  onSetIsFormLoginActive,
+  isFormLoginActive,
+  onSetCurrentUser,
+  onSetIsPopupOpened,
+}) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [nameValue, setNameValue] = useState("");
@@ -31,12 +44,50 @@ const Form = ({ title, buttonValue, authText, isPopupOpened, nameInput }) => {
 
   function handleFormSubmit(e) {
     e.preventDefault();
+    if (isFormRegisterActive) {
+      auth
+        .register(emailValue, passwordValue, nameValue)
+        .then((res) => {
+          if (res.message) {
+            setServerErrorText(res.message);
+          } else {
+            setServerErrorText("");
+            onSetIsSignupConfirmationActive(true);
+            onSetIsFormRegisterActive(false);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    if (isFormLoginActive) {
+      auth
+        .authorize(emailValue, passwordValue)
+        .then((res) => {
+          if (res.message) {
+            setServerErrorText(res.message);
+          } else {
+            setServerErrorText("");
+            auth
+              .getUser()
+              .then((res) => {
+                if (res.message) {
+                  setServerErrorText(res.message);
+                } else {
+                  onSetCurrentUser(res);
+                  onSetIsPopupOpened(false);
+                }
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   useEffect(() => {
     formRef.current.checkValidity()
       ? (buttonRef.current.disabled = false)
       : (buttonRef.current.disabled = true);
+    setServerErrorText("");
   }, [emailValue, passwordValue]);
 
   useEffect(() => {
@@ -44,6 +95,7 @@ const Form = ({ title, buttonValue, authText, isPopupOpened, nameInput }) => {
       formRef.current.checkValidity()
         ? (buttonRef.current.disabled = false)
         : (buttonRef.current.disabled = true);
+      setServerErrorText("");
     }
   }, [nameValue, nameInput]);
 
@@ -53,6 +105,8 @@ const Form = ({ title, buttonValue, authText, isPopupOpened, nameInput }) => {
       setPasswordValue("");
       setEmailErrorText("");
       setPasswordErrorText("");
+      setNameValue("");
+      setServerErrorText("");
     }
   }, [isPopupOpened]);
 
@@ -112,15 +166,33 @@ const Form = ({ title, buttonValue, authText, isPopupOpened, nameInput }) => {
       )}
       <div className="Form__button-container">
         <span className="Form__server-error">{serverErrorText}</span>
-        <button ref={buttonRef} type="submit" className="Form__button-submit">
+        <button
+          ref={buttonRef}
+          type="submit"
+          className="Form__button-submit"
+          disabled
+        >
           {buttonValue}
         </button>
       </div>
       <p className="Form__auth-text">
         или{" "}
-        <Link to="/" className="Form__auth-link">
+        <button
+          type="button"
+          onClick={() => {
+            if (isFormRegisterActive) {
+              onSetIsFormRegisterActive(false);
+              onSetIsFormLoginActive(true);
+            }
+            if (isFormLoginActive) {
+              onSetIsFormRegisterActive(true);
+              onSetIsFormLoginActive(false);
+            }
+          }}
+          className="Form__auth-link"
+        >
           {authText}
-        </Link>
+        </button>
       </p>
     </form>
   );

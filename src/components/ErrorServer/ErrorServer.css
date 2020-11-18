@@ -1,0 +1,36 @@
+.ErrorServer {
+  background: #f5f6f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ErrorServer__container {
+  max-width: 1232px;
+  margin: 80px 40px;
+  width: 100%;
+}
+
+.ErrorServer__title {
+  font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #FF0000;
+  margin: 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .ErrorServer__container {
+    margin: 40px 40px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .ErrorServer__container {
+    margin: 32px 16px;
+  }
+
+}

@@ -10,7 +10,12 @@ const Header = ({
   onSetLoggedInFalse,
   isSavedNewsPath,
   onSetSavedNewsPathBoolean,
-  onSetPopupOpened,
+  onSetIsPopupOpened,
+  onSetIsFormRegisterActive,
+  onSetIsFormLoginActive,
+  onSetIsSignupConfirmationActive,
+  isNavigationActive,
+  onSetIsResult
 }) => {
   return (
     <header
@@ -31,15 +36,22 @@ const Header = ({
         >
           NewsExplorer
         </Link>
-        <Navigation
-          isActiveButtonBurger={isActiveButtonBurger}
-          isLoggedIn={isLoggedIn}
-          onClickButtonBurger={onClickButtonBurger}
-          onSetLoggedInFalse={onSetLoggedInFalse}
-          onSetSavedNewsPathBoolean={onSetSavedNewsPathBoolean}
-          isSavedNewsPath={isSavedNewsPath}
-          onSetPopupOpened={onSetPopupOpened}
-        />
+        {isNavigationActive && (
+          <Navigation
+            isActiveButtonBurger={isActiveButtonBurger}
+            isLoggedIn={isLoggedIn}
+            onClickButtonBurger={onClickButtonBurger}
+            onSetLoggedInFalse={onSetLoggedInFalse}
+            onSetSavedNewsPathBoolean={onSetSavedNewsPathBoolean}
+            isSavedNewsPath={isSavedNewsPath}
+            onSetIsPopupOpened={onSetIsPopupOpened}
+            onSetIsFormRegisterActive={onSetIsFormRegisterActive}
+            onSetIsFormLoginActive={onSetIsFormLoginActive}
+            onSetIsSignupConfirmationActive={onSetIsSignupConfirmationActive}
+            onSetIsResult={onSetIsResult}
+          />
+        )}
+
         <Burger
           isActiveButtonBurger={isActiveButtonBurger}
           onClickButtonBurger={onClickButtonBurger}
